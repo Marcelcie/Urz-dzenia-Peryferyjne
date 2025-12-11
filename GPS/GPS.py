@@ -10,18 +10,18 @@ class SymulatorGPS:
     def __init__(self):
         self.dane = [
             "$GPRMC,120001,A,5049.5000,N,01532.1000,E,0.5,0.0,141125,,,A*70",
-            "$GPGGA,120001,5049.5000,N,01532.1000,E,1,08,0.9,540.0,M,40.0,M,,*47",
+            "$GPGGA,120001,5049.5000,N,01532.1000,E,1,08,0.9,689.0,M,40.0,M,,*4B",
             "$GPGSA,A,3,04,05,09,12,24,25,28,29,,,,,1.5,0.9,1.2*3E",
             "$GPGSV,3,1,11,03,03,111,00,04,15,270,00,06,01,010,00,13,06,292,00*75",
             "$GPGLL,5049.5000,N,01532.1000,E,120001,A,A*50",
 
             "$GPRMC,120002,A,5049.5050,N,01532.1050,E,0.6,0.0,141125,,,A*71",
-            "$GPGGA,120002,5049.5050,N,01532.1050,E,1,09,0.9,542.0,M,40.0,M,,*48",
+            "$GPGGA,120002,5049.5050,N,01532.1050,E,1,09,0.9,689.2,M,40.0,M,,*46",
             "$GPGSA,A,3,04,05,09,12,24,25,28,29,30,,,,1.4,0.9,1.1*3F",
             "$GPGLL,5049.5050,N,01532.1050,E,120002,A,A*51",
 
             "$GPRMC,120003,A,5049.5100,N,01532.1100,E,0.5,0.0,141125,,,A*72",
-            "$GPGGA,120003,5049.5100,N,01532.1100,E,1,09,0.9,545.0,M,40.0,M,,*49",
+            "$GPGGA,120003,5049.5100,N,01532.1100,E,1,09,0.9,689.5,M,40.0,M,,*46",
             "$GPGLL,5049.5100,N,01532.1100,E,120003,A,A*52"
         ]
         self.idx = 0
@@ -76,6 +76,7 @@ class GPSApp:
         self.lbl_lat = self.create_display_field(data_frame, "Szerokość:", 1, 0)
         self.lbl_lon = self.create_display_field(data_frame, "Długość:", 1, 1)
         self.lbl_alt = self.create_display_field(data_frame, "Wysokość (m):", 2, 0)
+        self.lbl_zone = self.create_display_field(data_frame, "Strefa Czasowa:", 2, 1)
 
         self.btn_map = tki.Button(root, text="Otwórz pozycję w Google Maps 🌍", command=self.open_map, state="disabled",
                                   bg="#2196F3", fg="white", font=("Arial", 10, "bold"))
@@ -183,13 +184,23 @@ class GPSApp:
             lat = self.nmea_to_decimal(lat_raw, lat_dir)
             lon = self.nmea_to_decimal(lon_raw, lon_dir)
 
-            formatted_time = f"{time_utc[:2]}:{time_utc[2:4]}:{time_utc[4:6]}"
+            time_zone_offset = int(lon / 15)
+            sign_str = "+" if time_zone_offset >= 0 else ""
+            zone_str = f"UTC{sign_str}{time_zone_offset}"
+
+            hh_utc = int(time_utc[:2])
+            mm = time_utc[2:4]
+            ss = time_utc[4:6]
+
+            hh_local = (hh_utc + time_zone_offset) % 24
+            formatted_time = f"{hh_local:02d}:{mm}:{ss}"
 
             self.lbl_time.config(text=formatted_time)
             self.lbl_sats.config(text=sats)
             self.lbl_lat.config(text=f"{lat:.6f}")
             self.lbl_lon.config(text=f"{lon:.6f}")
             self.lbl_alt.config(text=f"{alt}")
+            self.lbl_zone.config(text=zone_str)
 
             self.current_lat = lat
             self.current_lon = lon
