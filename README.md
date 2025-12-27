@@ -43,12 +43,12 @@ Aplikacja desktopowa do zaawansowanej obsługi kamer USB, realizująca podgląd 
 
 Główne funkcjonalności:
 
-**Algorytm HDR (High Dynamic Range):** Implementacja sekwencyjnego pobierania klatek z różną ekspozycją, scalania ich (metoda Debeveca) oraz mapowania tonów (Tone Mapping).
-**Rejestracja multimediów:** Zapis strumienia wideo (format AVI, kodek MJPG) oraz wykonywanie zrzutów pojedynczych klatek (PNG).
-**Dynamiczna konfiguracja:** Możliwość zmiany rozdzielczości i sterowania jasnością sensora w czasie rzeczywistym bez przerywania pracy programu.
-**Interfejs OSD (On-Screen Display):** Wyświetlanie kluczowych parametrów (FPS, aktualna rozdzielczość, powiadomienia) bezpośrednio na obrazie wideo.
-**Bezpieczeństwo zapisu:** System zapobiegający uszkodzeniu plików wideo przy nagłej zmianie parametrów strumienia.
-**Technologie:** Python, OpenCV (cv2), NumPy.
+* **Algorytm HDR (High Dynamic Range):** Implementacja sekwencyjnego pobierania klatek z różną ekspozycją, scalania ich (metoda Debeveca) oraz mapowania tonów (Tone Mapping).
+* **Rejestracja multimediów:** Zapis strumienia wideo (format AVI, kodek MJPG) oraz wykonywanie zrzutów pojedynczych klatek (PNG).
+* **Dynamiczna konfiguracja:** Możliwość zmiany rozdzielczości i sterowania jasnością sensora w czasie rzeczywistym bez przerywania pracy programu.
+* **Interfejs OSD (On-Screen Display):** Wyświetlanie kluczowych parametrów (FPS, aktualna rozdzielczość, powiadomienia) bezpośrednio na obrazie wideo.
+* **Bezpieczeństwo zapisu:** System zapobiegający uszkodzeniu plików wideo przy nagłej zmianie parametrów strumienia.
+* **Technologie:** Python, OpenCV (cv2), NumPy.
 
 ## 🛠️ Wymagania i Instalacja
 
