@@ -66,4 +66,4 @@ pip install opencv-python numpy
 2. Upewnij się, że masz zainstalowanego Pythona.
 3. Uruchom plik główny:
    ```bash
-   python gps.py
+   python np. gps.py
