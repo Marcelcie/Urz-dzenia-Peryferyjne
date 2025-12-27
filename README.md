@@ -39,17 +39,16 @@ Projekt oprogramowania dla układu SoC **ESP32**, realizujący bezprzewodową ak
 ---
 
 ### 3. 📷 Kamerki Cyfrowe
-Aplikacja desktopowa napisana w języku Python, służąca do zaawansowanej obsługi kamer USB. Program umożliwia podgląd na żywo, nagrywanie wideo, wykonywanie zdjęć oraz realizację techniki **HDR (High Dynamic Range)** poprzez łączenie klatek o różnych ekspozycjach.
+Aplikacja desktopowa do zaawansowanej obsługi kamer USB, realizująca podgląd na żywo, rejestrację materiałów oraz cyfrowe przetwarzanie obrazu (High Dynamic Range).
 
-## 🚀 Możliwości programu
+Główne funkcjonalności:
 
-* **Podgląd na żywo** z nakładką OSD (On-Screen Display) informującą o parametrach.
-* **Zapis zdjęć** (Snapshot) w formacie PNG.
-* **Nagrywanie wideo** w formacie AVI (kodek MJPG).
-* **Tryb HDR:** Automatyczne wykonanie serii zdjęć z różną ekspozycją (-7.0, -5.0, -3.0 EV), scalenie ich algorytmem Debevec i mapowanie tonów (Tone Mapping).
-* **Zmiana rozdzielczości** w locie (cykliczne przełączanie między 480p, 600p, 720p, 1080p).
-* **Sterowanie jasnością** obrazu.
-* **Powiadomienia ekranowe** potwierdzające wykonanie akcji (np. "Zapisano HDR").
+**Algorytm HDR (High Dynamic Range):** Implementacja sekwencyjnego pobierania klatek z różną ekspozycją, scalania ich (metoda Debeveca) oraz mapowania tonów (Tone Mapping).
+**Rejestracja multimediów:** Zapis strumienia wideo (format AVI, kodek MJPG) oraz wykonywanie zrzutów pojedynczych klatek (PNG).
+**Dynamiczna konfiguracja:** Możliwość zmiany rozdzielczości i sterowania jasnością sensora w czasie rzeczywistym bez przerywania pracy programu.
+**Interfejs OSD (On-Screen Display):** Wyświetlanie kluczowych parametrów (FPS, aktualna rozdzielczość, powiadomienia) bezpośrednio na obrazie wideo.
+**Bezpieczeństwo zapisu:** System zapobiegający uszkodzeniu plików wideo przy nagłej zmianie parametrów strumienia.
+**Technologie:** Python, OpenCV (cv2), NumPy.
 
 ## 🛠️ Wymagania i Instalacja
 
