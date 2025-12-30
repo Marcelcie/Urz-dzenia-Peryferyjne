@@ -20,7 +20,7 @@ Program łączy się z odbiornikiem GPS poprzez port szeregowy (Bluetooth SPP lu
 
 ## 🛠️ Technologie
 
-* **Język:** Python 3.x
+* **Język:** Python 3.13
 * **GUI:** Tkinter (wbudowany)
 * **Komunikacja:** `pyserial`
 * **Wątkowość:** `threading`
