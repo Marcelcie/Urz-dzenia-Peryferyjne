@@ -2,9 +2,9 @@
 #include <WiFi.h>
 #include <DHT.h>
 
-const char* ssid = "BOCIE";
+const char* ssid = "";
 const char* password = "";           
-const char* host = "192.168.1.102"; // IP telefonu
+const char* host = ""; // IP telefonu
 const uint16_t port = 8080;
 
 #define DHTPIN 13 
