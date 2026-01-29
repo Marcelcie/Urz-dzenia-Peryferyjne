@@ -1,28 +1,40 @@
+# 📷 Obsługa Kamer Cyfrowych i Algorytmy HDR
 
-===================================================================
-PROJEKT: Generator Kodów Kreskowych EAN-13 (Zadanie Laboratoryjne)
-AUTORZY: Marcel Cieśliński, Mateusz Bonifatiuk
-JĘZYK: Python
-===================================================================
+Aplikacja desktopowa napisana w języku **Python**, służąca do zaawansowanej obsługi kamer USB. Projekt realizuje podgląd na żywo, rejestrację materiałów wideo oraz cyfrowe przetwarzanie obrazu, ze szczególnym naciskiem na techniki **High Dynamic Range (HDR)**.
 
-1. CEL PROGRAMU
-Program generuje kod kreskowy w standardzie EAN-13 (European Article Numbering) na podstawie 12 lub 13 cyfr wejściowych.
+---
 
-2. WYMAGANIA I TECHNOLOGIA
-- Program został skompilowany do pliku EXE za pomocą narzędzia PyInstaller, dzięki czemu działa na systemie Windows bez konieczności instalowania środowiska Python.
-- Rysowanie graficznej symboliki kodu (pasków i cyfr) odbywa się przy użyciu biblioteki Pillow (PIL).
+## ⚙️ Główne funkcjonalności
 
-3. SPOSÓB URUCHOMIENIA
-Uruchom plik: ean13_generator.exe
+System oferuje szereg narzędzi do analizy i akwizycji obrazu w czasie rzeczywistym.
 
-   - Aplikacja poprosi o podanie 12 lub 13 cyfr.
-   - Dla 12 cyfr: Program automatycznie obliczy i wyświetli cyfrę kontrolną (metoda modulo 10) i wygeneruje kod PNG.
-   - Dla 13 cyfr: Program zweryfikuje poprawność cyfry kontrolnej przed wygenerowaniem kodu.
+### 1. 🎨 Algorytm HDR (High Dynamic Range)
+Implementacja techniki zwiększania rozpiętości tonalnej obrazu:
+* **Sekwencyjne pobieranie klatek:** Automatyczne przejmowanie klatek z różnymi parametrami ekspozycji.
+* **Scalanie obrazów:** Wykorzystanie **metody Debeveca** do łączenia klatek w jeden obraz o wysokiej dynamice.
+* **Tone Mapping:** Mapowanie tonów w celu poprawnego wyświetlenia obrazu HDR na standardowych monitorach.
 
-4. WYNIK DZIAŁANIA
-Wygenerowany obraz kodu EAN-13 (np. ean13_5901234567893.png) jest zapisywany w tym samym katalogu, z którego uruchomiono program.
+### 2. 🎥 Rejestracja Multimediów
+* **Wideo:** Zapis strumienia wideo do formatu `.avi` z wykorzystaniem kodeka **MJPG**.
+* **Zdjęcia:** Wykonywanie zrzutów pojedynczych klatek (snapshots) do formatu `.png`.
+* **Bezpieczeństwo zapisu:** Zaimplementowano system zapobiegający uszkodzeniu plików wideo w przypadku nagłej zmiany parametrów strumienia lub przerwania pracy.
 
-   - Program odwzorowuje kluczowe elementy normy EAN, w tym wydłużone linie startu/środka/stopu oraz prawidłowy układ bitowy (zestawy A, B, C).
+### 3. 🖥️ Interfejs i Konfiguracja (OSD)
+* **On-Screen Display (OSD):** Wyświetlanie kluczowych parametrów bezpośrednio na obrazie wideo (liczba klatek na sekundę - FPS, aktualna rozdzielczość, powiadomienia systemowe).
+* **Dynamiczna konfiguracja:** Możliwość zmiany rozdzielczości kamery oraz sterowania jasnością sensora w czasie rzeczywistym, bez konieczności restartowania aplikacji.
 
-Dziękujemy.
+---
 
+## 🛠️ Technologie i Wymagania
+
+Projekt wymaga zainstalowanego interpretera **Python 3**.
+
+### Biblioteki:
+Podstawą działania są biblioteki do obliczeń numerycznych i przetwarzania obrazu:
+* **OpenCV (`cv2`)**: Obsługa strumienia wideo, operacje na macierzach obrazu, algorytmy HDR.
+* **NumPy**: Operacje macierzowe niezbędne do szybkiego przetwarzania pikseli.
+
+### Instalacja zależności:
+Aby uruchomić projekt, zainstaluj wymagane pakiety komendą:
+```bash
+pip install opencv-python numpy
