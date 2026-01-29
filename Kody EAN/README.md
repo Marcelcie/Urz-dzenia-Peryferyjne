@@ -1,6 +1,4 @@
-README.txt (INSTRUKCJA GENERATORA EAN-13)
 
-```
 ===================================================================
 PROJEKT: Generator Kodów Kreskowych EAN-13 (Zadanie Laboratoryjne)
 AUTORZY: Marcel Cieśliński, Mateusz Bonifatiuk
@@ -27,4 +25,4 @@ Wygenerowany obraz kodu EAN-13 (np. ean13_5901234567893.png) jest zapisywany w t
    - Program odwzorowuje kluczowe elementy normy EAN, w tym wydłużone linie startu/środka/stopu oraz prawidłowy układ bitowy (zestawy A, B, C).
 
 Dziękujemy.
-```
+
