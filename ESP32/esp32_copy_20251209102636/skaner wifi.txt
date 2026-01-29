@@ -1,0 +1,44 @@
+#include "WiFi.h"
+
+void setup() {
+  Serial.begin(115200);
+
+  // Ustawiamy tryb Station - czyli ESP zachowuje się jak telefon szukający sieci
+  WiFi.mode(WIFI_STA);
+  WiFi.disconnect(); // Rozłączamy ewentualne stare połączenia
+  delay(100);
+
+  Serial.println("--- ZADANIE 2: URUCHOMIENIE SOC ---");
+  Serial.println("Inicjalizacja modułu radiowego zakonczona.");
+}
+
+void loop() {
+  Serial.println("Rozpoczynam skanowanie sieci WiFi...");
+
+  // Funkcja zwraca liczbę znalezionych sieci
+  int n = WiFi.scanNetworks();
+  Serial.println("Skanowanie zakonczone.");
+
+  if (n == 0) {
+    Serial.println("Nie znaleziono zadnych sieci.");
+  } else {
+    Serial.print("Znaleziono sieci: ");
+    Serial.println(n);
+
+    // Wypisanie listy sieci
+    for (int i = 0; i < n; ++i) {
+      // Wypisujemy nr, nazwe (SSID) i siłę sygnału (RSSI)
+      Serial.print(i + 1);
+      Serial.print(": ");
+      Serial.print(WiFi.SSID(i));
+      Serial.print(" (Sila: ");
+      Serial.print(WiFi.RSSI(i));
+      Serial.println(")");
+      delay(10);
+    }
+  }
+  Serial.println("-----------------------");
+  
+  // Czekaj 5 sekund i skanuj znowu
+  delay(5000);
+}

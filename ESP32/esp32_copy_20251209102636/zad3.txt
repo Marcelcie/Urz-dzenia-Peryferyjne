@@ -1,0 +1,76 @@
+#include <WiFi.h>
+
+// --- KONFIGURACJA SIECI (Wpisz dane z Zadania 1) ---
+const char* ssid     = "Nazwa_Twojej_Sieci_z_Routera"; 
+const char* password = "Haslo_Twojej_Sieci";
+
+// Ustawiamy serwer na porcie 80
+WiFiServer server(80);
+
+// Dioda LED na płytce (zazwyczaj pin 2)
+const int ledPin = 2;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  delay(10);
+
+  // --- Realizacja pkt 3a: Aktywacja urządzenia ---
+  Serial.println();
+  Serial.println("--- START SYSTEMU (Pkt 3a) ---");
+  
+  // --- Realizacja pkt 3b: Uruchomienie transmisji WiFi ---
+  Serial.print("Łączenie z siecią: ");
+  Serial.println(ssid);
+
+  WiFi.begin(ssid, password);
+
+  // Czekamy na połączenie z routerem
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi połączone.");
+  Serial.print("Adres IP ESP32: ");
+  Serial.println(WiFi.localIP()); // WAŻNE: To IP wpiszesz w telefonie!
+  
+  server.begin();
+  Serial.println("Serwer uruchomiony. Czekam na klienta...");
+}
+
+void loop() {
+  // --- Realizacja pkt 3c: Realizacja połączenia z urządzeniem ---
+  WiFiClient client = server.available(); // Nasłuchujemy klienta
+
+  if (client) {
+    Serial.println("-> Nowy Klient (Telefon) połączony! (Pkt 3c)");
+    String currentLine = "";
+
+    while (client.connected()) {
+      if (client.available()) {
+        // --- Realizacja pkt 3d: Przesłanie danych ---
+        char c = client.read(); // Odbieramy znak po znaku
+        Serial.write(c);        // Wypisujemy w konsoli (do raportu)
+
+        // PROSTA LOGIKA STEROWANIA:
+        // Jeśli otrzymamy '1' -> Włącz diodę
+        // Jeśli otrzymamy '0' -> Wyłącz diodę
+        if (c == '1') {
+          digitalWrite(ledPin, HIGH);
+          client.println("Dioda WLACZONA"); // Odesłanie potwierdzenia do telefonu
+          Serial.println("\n[Akcja] Zapalono LED");
+        }
+        if (c == '0') {
+          digitalWrite(ledPin, LOW);
+          client.println("Dioda WYLACZONA");
+          Serial.println("\n[Akcja] Zgaszono LED");
+        }
+      }
+    }
+    // Gdy klient się rozłączy
+    client.stop();
+    Serial.println("Klient rozłączony. (Pkt 3a - wyjście)");
+  }
+}
